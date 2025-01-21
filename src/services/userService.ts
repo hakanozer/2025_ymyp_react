@@ -7,3 +7,4 @@ export const userLogin = ( email: string, password: string ) => {
     }
     return api.post('auth/login', sendObj)
 }
+
