@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { userRegister } from '../services/userService'
 
 function Register() {
 
@@ -21,9 +22,22 @@ function Register() {
     }else if( confirmPassword !== password ) {
       alert('Password does not match')
     }else{
-      console.log(name, email, password)
-      // window.location.href = '/' // redirect
-      navigate('/')
+      
+      userRegister(name, email, password).then( res => {
+          const status = res.status
+          const data = res.data
+          if (status === 201) { 
+              navigate('/')
+          }else {
+            //const message = data.errors?.email?.[0]
+            console.log(data.errors)
+            alert('User already exists')
+          }
+      }).catch( err => {
+          console.log(err)
+          alert(err.message)
+      })
+      
     }
 
   }

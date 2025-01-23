@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { userLogin } from '../services/userService'
 
 function Login() {
 
@@ -10,9 +11,22 @@ function Login() {
 
   const fncLogin = (evt: React.FormEvent) => {
     evt.preventDefault() // form submit cancel
-    if(email === 'ali@mail.com' || password === '12345') {
-      navigate('/products', { replace: true })
-    }
+    userLogin(email, password).then( res => {
+      const status = res.status
+      const userData = res.data
+      if (status === 200) {
+        localStorage.setItem('token', userData.data.access_token)
+        localStorage.setItem('id', userData.data.user.id.toString())
+        localStorage.setItem('name', userData.data.user.name)
+        localStorage.setItem('role', userData.data.user.role)
+        navigate('/products', { replace: true })
+      }else {
+        alert('Invalid email or password')
+      }
+    }).catch( err => {
+      console.log(err)
+      alert(err.message)
+    })
   }
 
   return (

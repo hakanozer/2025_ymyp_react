@@ -1,3 +1,5 @@
+import { IUser } from "../models/IUser";
+import { IUserRegister } from "../models/IUserRegister";
 import api from "./api";
 
 export const userLogin = ( email: string, password: string ) => {
@@ -5,6 +7,15 @@ export const userLogin = ( email: string, password: string ) => {
         email: email,
         password: password
     }
-    return api.post('auth/login', sendObj)
+    return api.post<IUser>('auth/login', sendObj)
+}
+
+export const userRegister = ( name: string, email: string, password: string ) => {
+    const sendObj = {
+        name: name,
+        email: email,
+        password: password
+    }
+    return api.post<IUserRegister>('auth/signup', sendObj)
 }
 
