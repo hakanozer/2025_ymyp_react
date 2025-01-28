@@ -24,3 +24,9 @@ export interface Meta {
     status:  number;
     message: string;
 }
+
+
+export interface IJWTProfile {
+    meta: Meta;
+    data: User
+}

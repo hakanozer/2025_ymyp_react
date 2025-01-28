@@ -1,4 +1,4 @@
-import { IUser } from "../models/IUser";
+import { IJWTProfile, IUser } from "../models/IUser";
 import { IUserRegister } from "../models/IUserRegister";
 import api from "./api";
 
@@ -17,5 +17,12 @@ export const userRegister = ( name: string, email: string, password: string ) =>
         password: password
     }
     return api.post<IUserRegister>('auth/signup', sendObj)
+}
+
+export const userProfile = ( jwt : string ) => {
+    const header = {
+        Authorization: `Bearer ${jwt}`,
+    }
+    return api.get<IJWTProfile>('profile/me', { headers: header })
 }
 

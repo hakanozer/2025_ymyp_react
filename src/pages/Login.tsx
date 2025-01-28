@@ -24,8 +24,7 @@ function Login() {
         alert('Invalid email or password')
       }
     }).catch( err => {
-      console.log(err)
-      alert(err.message)
+      alert(err.response.data.message)
     })
   }
 
