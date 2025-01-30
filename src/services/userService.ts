@@ -19,7 +19,7 @@ export const userRegister = ( name: string, email: string, password: string ) =>
     return api.post<IUserRegister>('auth/signup', sendObj)
 }
 
-export const userProfile = ( jwt : string ) => {
+export const userProfile = ( jwt: string ) => {
     const header = {
         Authorization: `Bearer ${jwt}`,
     }

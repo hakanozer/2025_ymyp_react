@@ -23,6 +23,11 @@ function Navbar() {
         }
     }, [] )
 
+    const logout = () => {
+        localStorage.clear()
+        window.location.replace('/')
+    }
+
 
   return (
     <>
@@ -48,7 +53,7 @@ function Navbar() {
                 <li><a className="dropdown-item" href="#">Action</a></li>
                 <li><a className="dropdown-item" href="#">Another action</a></li>
                 <li><hr className="dropdown-divider" /></li>
-                <li><a className="dropdown-item" href="#">Logout</a></li>
+                <li><a className="dropdown-item" role='button' onClick={logout}>Logout</a></li>
             </ul>
             </li>
             <li className="nav-item">
