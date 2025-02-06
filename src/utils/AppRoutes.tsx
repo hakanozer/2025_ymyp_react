@@ -7,6 +7,8 @@ import Products from '../pages/Products'
 import Control from './Control'
 import Likes from '../pages/Likes'
 import ProductDetail from '../pages/ProductDetail'
+import Search from '../pages/Search'
+import Users from '../pages/Users'
 
 const AppRoutes = () => 
 <BrowserRouter>
@@ -16,6 +18,8 @@ const AppRoutes = () =>
         <Route path='/products' element={ <Control item={ <Products /> } /> } />
         <Route path='/likes' element={ <Control item={ <Likes /> } /> } />
         <Route path='/productDetail/:pid' element={ <Control item={ <ProductDetail /> } /> } />
+        <Route path='/search' element={ <Control item={ <Search /> } /> } />
+        <Route path='/users' element={ <Control item={ <Users /> } /> } />
     </Routes>
 </BrowserRouter>
 

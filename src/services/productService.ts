@@ -1,4 +1,4 @@
-import { IProduct, IProductDetail } from "../models/IProduct"
+import { IProduct, IProductDetail, Product } from "../models/IProduct"
 import api from "./api"
 
 export const allProduct = (page: string, per_page: string) => {
@@ -11,4 +11,8 @@ export const allProduct = (page: string, per_page: string) => {
 
 export const singleProduct = (pid: string) => {
     return api.get<IProductDetail>('products/' + pid)
+}
+
+export const productSearch = (query: string) => {
+    return api.get<Product[]>('products/search', { params: { query: query } })
 }
