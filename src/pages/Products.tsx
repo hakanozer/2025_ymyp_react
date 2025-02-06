@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { allProduct } from '../services/productService'
 import { Product } from '../models/IProduct'
 import { NavLink } from 'react-router-dom'
+import { getSingleLikes } from '../utils/store'
 
 function Products() {
 
@@ -23,7 +24,10 @@ function Products() {
               <div className="card-body">
                 <h5 className="card-title">{item.title}</h5>
                 <p className="card-text">{item.price}₺</p>
-                <NavLink to={'/productDetail/'+item.id} className='btn btn-warning' >Detail</NavLink>
+                <div className='d-flex justify-content-between align-items-center'>
+                  <NavLink to={'/productDetail/'+item.id} className='btn btn-warning' >Detail</NavLink>
+                  <i className={ getSingleLikes(item.id.toString()) === false ? 'bi bi-suit-heart fs-2' : 'bi bi-suit-heart-fill fs-2 text-danger' }></i>
+                </div>
               </div>
             </div>
           </div>

@@ -38,3 +38,14 @@ export const getSingleLikes = ( pid: string ) => {
  }
 
  // getAllLikes -> likes varsa string[] yoksa boş string[]
+ export const getAllLikes = () => {
+    const stLikes = localStorage.getItem('likes')
+    try {
+        if (stLikes) {
+            return JSON.parse(stLikes) as string[]
+        }
+    } catch (error) {
+        localStorage.removeItem("likes")
+    }
+    return []
+ }
