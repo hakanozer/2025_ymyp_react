@@ -1,6 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { userProfile } from '../services/userService'
+import { getAllLikes } from '../utils/store'
+import { useDispatch, useSelector } from 'react-redux'
+import { ILikesAction } from '../useRedux/likesReducer'
+import { StateType } from '../useRedux/reduxStore'
 
 function Navbar() {
 
@@ -45,6 +49,21 @@ function Navbar() {
         window.location.replace('/')
     }
 
+    // reduxa datayı gönderme
+    const dispatch = useDispatch()
+
+    // reduxtan datayı alma
+    const allLikes = useSelector( (item: StateType) =>  item.likesReducer )
+    useEffect(() => {
+      const arr = getAllLikes()
+      const sendObj:ILikesAction = {
+          type: 'ALL_LIKES',
+          payload: arr
+      } 
+      dispatch(sendObj)
+    }, [])
+    
+
 
   return (
     <>
@@ -60,7 +79,7 @@ function Navbar() {
             <NavLink to={'/products'} className="nav-link">Products</NavLink>
             </li>
             <li className="nav-item">
-            <NavLink to={'/likes'} className="nav-link">Likes</NavLink>
+            <NavLink to={'/likes'} className="nav-link">Likes({allLikes.length})</NavLink>
             </li>
             <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

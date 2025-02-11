@@ -4,6 +4,8 @@ import { singleProduct } from '../services/productService'
 import { Product } from '../models/IProduct'
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { ILikesAction } from '../useRedux/likesReducer'
 
 function Likes() {
 
@@ -18,8 +20,15 @@ function Likes() {
     likesRefresh()
   }
 
+  // reduxa datayı gönderme
+  const dispatch = useDispatch()
   const likesRefresh = () => {
     const arrIds = getAllLikes()
+    const sendObj:ILikesAction = {
+        type: 'ALL_LIKES',
+        payload: arrIds
+    } 
+    dispatch(sendObj)
     const arrProduct: Product[] = []
     axios.all(arrIds.map(id => singleProduct(id))).then(res => {
       res.map(r => {

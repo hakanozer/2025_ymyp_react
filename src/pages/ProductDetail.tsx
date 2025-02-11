@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { singleProduct } from '../services/productService'
 import { Product } from '../models/IProduct'
-import { getSingleLikes, isLikesControl } from '../utils/store'
+import { getAllLikes, getSingleLikes, isLikesControl } from '../utils/store'
+import { useDispatch } from 'react-redux'
+import { ILikesAction } from '../useRedux/likesReducer'
 
 function ProductDetail() {
 
@@ -20,6 +22,8 @@ function ProductDetail() {
   }, [isLike])
   */
 
+  // reduxa datayı gönderme
+  const dispatch = useDispatch()
   const likesControl = () => {
     const likesStatus = !isLike
     setIsLike(likesStatus)
@@ -27,6 +31,12 @@ function ProductDetail() {
     if (item && pid) {
         isLikesControl(pid)
     }
+    const arr = getAllLikes()
+    const sendObj:ILikesAction = {
+        type: 'ALL_LIKES',
+        payload: arr
+    } 
+    dispatch(sendObj)
   }
 
   useEffect(() => {
