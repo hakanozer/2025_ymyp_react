@@ -3,7 +3,7 @@ import { likesReducer } from "./likesReducer";
 import { basketReducer } from "./basketReducer";
 
 const combine = combineReducers({
-    likesReducer, basketReducer
+    likesReducer
 })
 
 // datayı redux ortamından çekerken hengi reducer üyesinin gelmesi gerektiğine karar verecek.
