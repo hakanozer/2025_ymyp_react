@@ -1,8 +1,9 @@
 import { combineReducers, legacy_createStore } from "redux";
 import { likesReducer } from "./likesReducer";
+import { basketReducer } from "./basketReducer";
 
 const combine = combineReducers({
-    likesReducer
+    likesReducer, basketReducer
 })
 
 // datayı redux ortamından çekerken hengi reducer üyesinin gelmesi gerektiğine karar verecek.
